@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Scoreboard.css'
 import Player from './Player'
+import AddPlayer from './AddPlayer';
 
 
 export default class Scoreboard extends Component {
@@ -37,6 +38,17 @@ export default class Scoreboard extends Component {
     )
   }
 
+  addPlayer = (name) => {
+    const player = {
+      id: Math.floor(Math.random() * 100000),
+      name,
+      score: 0
+    }
+    this.setState({
+      players: this.state.players.concat(player)
+    })
+  }
+
   updatePlayerScore = (id, score) => {
     const updatePlayers = this.state.players.map(
       player => {
@@ -65,7 +77,7 @@ export default class Scoreboard extends Component {
                     .map(this.renderPlayer)
           }
         </ul>
-        
+        <AddPlayer addPlayer={this.addPlayer} />
       </div>
     )
   }
